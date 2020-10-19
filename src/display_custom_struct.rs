@@ -1,5 +1,5 @@
 use std::fmt;
-use std::fmt::{Write, Formatter};
+use std::fmt::{Formatter,};
 
 pub(crate) struct List(Vec<i32>);
 
@@ -10,13 +10,13 @@ impl List {
 }
 
 impl fmt::Display for List {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         let vec = &self.0;
 
         write!(f, "[")?;
 
         for (count,v) in vec.iter().enumerate() {
-            if (count != 0) { write!(f, ", ")?; }
+            if count != 0 { write!(f, ", ")?; }
             write!(f, "{} --> {}", count, v)?;
         }
 
@@ -24,6 +24,7 @@ impl fmt::Display for List {
     }
 }
 
+#[derive(Debug)] //{:?}
 pub (crate) struct Color {
     red: u8,
     green: u8,
@@ -37,7 +38,7 @@ impl Color {
 }
 
 impl fmt::Display for Color {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         write!(f, "RGB ")?;
         write!(f, "({}, {}, {}) ", self.red, self.green, self.blue)?;
         write!(f, "{:#X}{:X}{:X}", self.red, self.green, self.blue)
